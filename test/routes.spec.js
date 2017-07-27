@@ -1,9 +1,10 @@
 process.env.NODE_ENV = 'test';
 
-var chai = require('chai');
-var should = chai.should();
-var chaiHttp = require('chai-http');
-var server = require('../server.js');
+var knex = require('../db/knex')
+const chai = require('chai');
+const should = chai.should();
+const chaiHttp = require('chai-http');
+const server = require('../server.js');
 
 chai.use(chaiHttp);
 
@@ -91,24 +92,45 @@ describe('API GET Routes',() => {
   });
 });
 
-// describe('API POST Routes', function() {
-//   before((done)=> {
-//     knex.migrate.rollback()
-//     .then(() =>{
-//       knex.migrate.latest()
-//       .then(() => {
-//         return knex.seed.run()
-//         .then(()=> {
-//           done();
-//         });
-//       });
-//     });
-//   });
-//
-//   beforeEach(done => {
-//     knex.seed.run()
-//     .then(() => done());
-//   });
-//
-//   // it('should post a new order to api/v1/orders')
-// });
+describe('API POST Routes', function() {
+  // before((done)=> {
+  //   knex.migrate.rollback()
+  //   .then(() =>{
+  //     knex.migrate.latest()
+  //     .then(() => {
+  //       return knex.seed.run()
+  //       .then(()=> {
+  //         done();
+  //       });
+  //     });
+  //   });
+  // });
+  //
+  // beforeEach(done => {
+  //   knex.seed.run()
+  //   .then(() => done());
+  // });
+  //
+  // it('should post a new order to api/v1/orders', (done) => {
+  //   chai.request(server)
+  //   .post('/api/v1/orders')
+  //   .send({
+  //     "price": 850,
+  //     "date": "February 10th, 2018"
+  //   })
+  //   .end((err, response) =>{
+  //     console.log(err)
+  //     response.should.have.status(201);
+  //     done();
+  //     chai.request(server)
+  //     .get('/api/v1/orders/:2')
+  //     .end((err, response) =>{
+  //       response.should.have.status(200);
+  //       response.should.be.json;
+  //       response[0].price.should.equal(850);
+  //       response[0].date.should.equal("February 10th, 2018")
+  //       done();
+  //     })
+  //   })
+  // })
+});

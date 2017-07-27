@@ -104,6 +104,7 @@ app.post('/api/v1/orders', (request, response) => {
   let data = request.body
   database('orders').select()
   .then((orders) => {
+    console.log(orders)
     let match = orders.find((order) =>{
       return order.date === data.date;
     })
@@ -113,14 +114,13 @@ app.post('/api/v1/orders', (request, response) => {
         total_price: data.price
       }, 'id')
       .then((orderId) => {
-          response.status(201).json({orderId})
+          response.status(201).json(orderId)
         })
-        .catch((error) => console.log(error))
+        .catch((error) => console.log('THIS IS AN ERROR', error))
     } else {
       database('orders').where('date', data.date).select()
       .then((specificOrder) =>{
-        let dataPrice = parseInt(data.price, 10)
-        database('orders').where('id', specificOrder[0].id).increment('total_price', dataPrice)
+        database('orders').where('id', specificOrder[0].id).increment('total_price', data.price)
         .then((orderUpdate) =>{
           response.status(201).json({orderUpdate})
         })
