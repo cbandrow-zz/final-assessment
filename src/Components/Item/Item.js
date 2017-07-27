@@ -9,9 +9,9 @@ const Item = ({item, addToCart}) =>{
       <div>
         <img src = {item.picture_url}/>
       </div>
-      <h3><em>{item.price}</em></h3>
+      <h3><em>${item.price}</em></h3>
       <p>{item.item_description}</p>
-      <button onClick={() =>{addToCart(item)}} 
+      <button onClick={() =>{addToCart(item)}}
               className = "cart-btn">Add To Cart</button>
     </section>
   )

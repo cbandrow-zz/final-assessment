@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 
 import ItemHolder from './Components/ItemHolder/ItemHolder'
-// import CartItemHolder from './Components/CartItemHolder'
+import CartItemHolder from './Components/CartItemHolder/CartItemHolder'
 // import RecentOrderHolder from './Components/RecentOrderHolder'
 
 
@@ -17,6 +17,9 @@ class App extends Component {
     }
   }
   componentDidMount(){
+    let cart = JSON.parse(localStorage.getItem('cart')) || ''
+    console.log(cart)
+
     fetch('/api/v1/items')
       .then(data => data.json())
       .then((items) => {
@@ -32,6 +35,11 @@ class App extends Component {
           orders: orders
         })
       })
+
+  }
+
+  storeLocal(cart){
+    localStorage.setItem('cart', cart)
   }
 
   addToCart(item){
@@ -40,17 +48,17 @@ class App extends Component {
       cart: this.state.cart
     })
     console.log(this.state.cart)
-  }
-
-  removeFromCart(item){
-    
+    this.storeLocal(this.state.cart)
   }
 
   render() {
     return (
       <div className="App">
-        <h1>Amazonbayetsy</h1>
-        <ItemHolder items = {this.state.items} addToCart = {this.addToCart.bind(this)}/>
+        <h1>AmazonBay</h1>
+        <main>
+          <ItemHolder items = {this.state.items} addToCart = {this.addToCart.bind(this)}/>
+          <CartItemHolder cartItems = {this.state.cart}/>
+        </main>
       </div>
     );
   }
