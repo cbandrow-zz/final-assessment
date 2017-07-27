@@ -25,24 +25,22 @@ export default class CartItemHolder extends Component{
   }
 
   handleCheckout(total){
-
     let today = new Date();
-    
     let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 
     fetch('/api/v1/orders',{
       method: "POST",
-      body: {
-        "date": `${date}`,
-        "total": `${total}`
-      }
+      header:{"Content-Type":"application/json"},
+      body: JSON.stringify({
+        "price": `${total}`,
+        "date": `${date}`
+      })
     }).catch(err => console.log(err))
-
-    localStorage.setItem('cart', '')
+    localStorage.clear()
   }
 
   render(){
-    let {cartItems} = this.props;
+    let {cartItems, clearCart} = this.props;
 
     let total = cartItems.reduce((acc, cartItem) =>{
       return acc + parseFloat(cartItem.price)
@@ -67,7 +65,11 @@ export default class CartItemHolder extends Component{
             )
           }
         )}
-        <h2>Total Price: ${total}</h2>
+        {cartItems.length > 0 ? (
+          <h2>Total Price: ${total}</h2>
+        ) : (
+          <h2>Add Something to your Cart</h2>
+        )}
         <button className = "purchase" onClick = {() => this.handleCheckout(total)}>Submit and Purchase</button>
       </div>
     </section>

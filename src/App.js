@@ -17,7 +17,7 @@ class App extends Component {
     }
   }
   componentDidMount(){
-    let cart = JSON.parse(localStorage.getItem('cart')) || ''
+    let cart = JSON.parse(localStorage.getItem('cart')) || []
     console.log(cart)
 
     fetch('/api/v1/items')
@@ -35,11 +35,16 @@ class App extends Component {
           orders: orders
         })
       })
+    this.setState({
+      cart: cart,
+    })
 
   }
 
-  storeLocal(cart){
-    localStorage.setItem('cart', cart)
+  clearCart(){
+    this.setState({
+      cart: []
+    })
   }
 
   addToCart(item){
@@ -51,13 +56,17 @@ class App extends Component {
     this.storeLocal(this.state.cart)
   }
 
+  storeLocal(cart){
+    localStorage.setItem('cart', JSON.stringify(cart))
+  }
+
   render() {
     return (
       <div className="App">
         <h1>AmazonBay</h1>
         <main>
           <ItemHolder items = {this.state.items} addToCart = {this.addToCart.bind(this)}/>
-          <CartItemHolder cartItems = {this.state.cart}/>
+          <CartItemHolder cartItems = {this.state.cart} clearCart = {this.clearCart.bind(this)}/>
         </main>
       </div>
     );
