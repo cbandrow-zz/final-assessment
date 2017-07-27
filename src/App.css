@@ -1,24 +1,88 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css?family=Lato:400,400i,700');
+
+*{
+  font-family: 'Lato';
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+h1{
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.App{
+  width: 100%;
+  background-color: #e0e0e0;
 }
 
-.App-intro {
-  font-size: large;
+.ItemHolder{
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 70%;
+  background-color: #eeeeee;
+  box-shadow: 0px 0px 4px #444;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.Item{
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  width: 320px;
+  height: 650px;
+  background-color: #efefff;
+  border: 1px solid #555;
+  position: relative;
+}
+
+.Item h2{
+  display: block;
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.Item h3{
+  display: block;
+  font-size: 19px;
+}
+
+.Item p, h2, h3{
+  margin-left: 7px;
+}
+
+.Item img{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+  border: 2px solid #888;
+}
+
+.Item div{
+  width: 90%;
+}
+
+.Item header{
+  height: 15%;
+}
+
+.cart-btn{
+  width: 100%;
+  color: #eee;
+  background-color: #333388;
+  border-top: 1px solid #333;
+  height: 65px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.cart-btn:hover{
+  background-color: #555588;
+}
+
+.cart-btn:disabled{
+  background-color: #777788;
 }
