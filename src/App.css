@@ -9,6 +9,11 @@ h1{
   margin-right: auto;
 }
 
+main{
+  display: flex;
+  justify-content: space-between;
+}
+
 .App{
   width: 100%;
   background-color: #e0e0e0;
@@ -20,7 +25,7 @@ h1{
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  width: 70%;
+  width: 60%;
   background-color: #eeeeee;
   box-shadow: 0px 0px 4px #444;
 }
@@ -30,7 +35,7 @@ h1{
   margin-right: auto;
   margin-top: 5px;
   margin-bottom: 5px;
-  width: 320px;
+  width: 290px;
   height: 650px;
   background-color: #efefff;
   border: 1px solid #555;
@@ -85,4 +90,77 @@ h1{
 
 .cart-btn:disabled{
   background-color: #777788;
+}
+
+.CartItemHolder{
+  display: flex;
+  justify-content: space-between;
+  border: 1px #222 solid;
+  background-color: #eeeeff;
+  height: 100%;
+  width: auto;
+}
+
+.display-cart{
+  height: 100%;
+  width: 100%;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 0;
+  background-color: #ccccff;
+}
+
+.display-cart img{
+  width: 75%;
+}
+
+.cart-side{
+  width: 40px;
+  height: 600px;
+  background-color: #ccccff;
+  border: 1px #222 solid;
+}
+
+.cart-contents-off{
+  color: #111;
+  display: none;
+}
+.cart-contents-on{
+  width: 400px;
+  display: block;
+  position: relative;
+}
+
+.purchase{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 24px;
+  color: #eee;
+  background-color: #333388;
+  border: 2px solid #333;
+  border-radius: 0;
+  height: 45px;
+  width: 100%;
+}
+
+.purchase:hover{
+  background-color: #555588;
+}
+
+.CartItem{
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+}
+
+.CartItem h2{
+  font-size: 15px;
+}
+
+.CartItem h3{
+  font-size: 14px;
 }
