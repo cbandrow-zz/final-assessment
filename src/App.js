@@ -12,7 +12,8 @@ class App extends Component {
     super()
     this.state = {
       items: [],
-      orders: []
+      orders: [],
+      cart: []
     }
   }
   componentDidMount(){
@@ -34,7 +35,15 @@ class App extends Component {
   }
 
   addToCart(item){
-    console.log(item)
+    this.state.cart.push(item)
+    this.setState({
+      cart: this.state.cart
+    })
+    console.log(this.state.cart)
+  }
+
+  removeFromCart(item){
+    
   }
 
   render() {
