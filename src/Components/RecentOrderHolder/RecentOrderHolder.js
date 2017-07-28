@@ -44,7 +44,7 @@ export default class  RecentOrderHolder extends Component{
               return(
                 <div>
                   <h3>Date: {order.date}</h3>
-                  <p>Total: {order.total_price}</p>
+                  <p>Total: ${order.total_price}</p>
                 </div>
               )
             }
