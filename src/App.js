@@ -4,7 +4,7 @@ import './App.css';
 
 import ItemHolder from './Components/ItemHolder/ItemHolder'
 import CartItemHolder from './Components/CartItemHolder/CartItemHolder'
-// import RecentOrderHolder from './Components/RecentOrderHolder'
+import RecentOrderHolder from './Components/RecentOrderHolder/RecentOrderHolder'
 
 
 class App extends Component {
@@ -65,6 +65,7 @@ class App extends Component {
       <div className="App">
         <h1>AmazonBay</h1>
         <main>
+          <RecentOrderHolder orders = {this.state.orders}/>
           <ItemHolder items = {this.state.items} addToCart = {this.addToCart.bind(this)}/>
           <CartItemHolder cartItems = {this.state.cart} clearCart = {this.clearCart.bind(this)}/>
         </main>
