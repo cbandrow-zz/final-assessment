@@ -8,6 +8,7 @@ const configuration = require('./knexfile')[environment];
 const database = require('knex')(configuration);
 
 app.use(bodyParser.json());
+
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.set('port', process.env.PORT || 3000);
@@ -102,31 +103,17 @@ app.get('/api/v1/orders/:id', (request, response) => {
 
 app.post('/api/v1/orders', (request, response) => {
   let data = request.body
+  let price = parseInt(data.price)
   database('orders').select()
   .then((orders) => {
-    console.log(orders)
-    let match = orders.find((order) =>{
-      return order.date === data.date;
-    })
-    if (!match) {
       database('orders').insert({
         date: data.date,
-        total_price: data.price
+        total_price: price
       }, 'id')
       .then((orderId) => {
           response.status(201).json(orderId)
         })
         .catch((error) => console.log('THIS IS AN ERROR', error))
-    } else {
-      database('orders').where('date', data.date).select()
-      .then((specificOrder) =>{
-        database('orders').where('id', specificOrder[0].id).increment('total_price', data.price)
-        .then((orderUpdate) =>{
-          response.status(201).json({orderUpdate})
-        })
-        .catch((error) => console.log(error))
-      })
-    }
   })
 })
 

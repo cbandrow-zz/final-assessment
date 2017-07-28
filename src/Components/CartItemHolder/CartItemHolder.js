@@ -25,17 +25,24 @@ export default class CartItemHolder extends Component{
   }
 
   handleCheckout(total){
-    let today = new Date();
-    let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    let date = new Date()
+    let year = date.getFullYear()
+    let month = date.getMonth()
+    let day = date.getDate()
+
+    let time = `${month}-${day}-${year}`
+
+    let jsonTotal = JSON.stringify(total)
 
     fetch('/api/v1/orders',{
       method: "POST",
-      header:{"Content-Type":"application/json"},
+      headers: {"Content-Type":"application/json"},
       body: JSON.stringify({
-        "price": `${total}`,
-        "date": `${date}`
+        price: total,
+        date: time
       })
-    }).catch(err => console.log(err))
+    }).then((response) => console.log(response))
+    .catch(err => console.log(err))
     localStorage.clear()
   }
 

@@ -164,3 +164,44 @@ main{
 .CartItem h3{
   font-size: 14px;
 }
+
+
+.RecentOrderHolder{
+  display: flex;
+  justify-content: space-between;
+  border: 1px #222 solid;
+  background-color: #eeeeff;
+  height: 100%;
+  width: auto;
+}
+
+.display-orders{
+  height: 100%;
+  width: 100%;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 0;
+  background-color: #ccccff;
+}
+
+.display-orders img{
+  width: 75%;
+}
+
+.order-side{
+  width: 40px;
+  height: 600px;
+  background-color: #ccccff;
+  border: 1px #222 solid;
+}
+
+.order-contents-off{
+  color: #111;
+  display: none;
+}
+.order-contents-on{
+  width: 400px;
+  display: block;
+  position: relative;
+}
