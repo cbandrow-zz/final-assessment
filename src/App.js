@@ -18,7 +18,6 @@ class App extends Component {
   }
   componentDidMount(){
     let cart = JSON.parse(localStorage.getItem('cart')) || []
-    console.log(cart)
 
     fetch('/api/v1/items')
       .then(data => data.json())
@@ -38,7 +37,6 @@ class App extends Component {
     this.setState({
       cart: cart,
     })
-
   }
 
   clearCart(){
@@ -52,7 +50,6 @@ class App extends Component {
     this.setState({
       cart: this.state.cart
     })
-    console.log(this.state.cart)
     this.storeLocal(this.state.cart)
   }
 
