@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 import ItemHolder from './Components/ItemHolder/ItemHolder'
@@ -16,6 +15,7 @@ class App extends Component {
       cart: []
     }
   }
+
   componentDidMount(){
     let cart = JSON.parse(localStorage.getItem('cart')) || []
 
@@ -39,9 +39,10 @@ class App extends Component {
     })
   }
 
-  clearCart(){
+  updateOrders(orders){
     this.setState({
-      cart: []
+      cart: [],
+      orders: orders
     })
   }
 
@@ -64,7 +65,7 @@ class App extends Component {
         <main>
           <RecentOrderHolder orders = {this.state.orders}/>
           <ItemHolder items = {this.state.items} addToCart = {this.addToCart.bind(this)}/>
-          <CartItemHolder cartItems = {this.state.cart} clearCart = {this.clearCart.bind(this)}/>
+          <CartItemHolder cartItems = {this.state.cart} updateOrders = {this.updateOrders.bind(this)}/>
         </main>
       </div>
     );

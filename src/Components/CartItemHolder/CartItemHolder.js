@@ -6,7 +6,22 @@ export default class CartItemHolder extends Component{
     super()
     this.state = {
       button: false,
-      display: 'cart-contents-off'
+      display: 'cart-contents-off',
+      cartItems: [],
+    }
+  }
+
+  componentDidMount(){
+    this.setState({
+      cartItems: this.props.cartItems
+    })
+  }
+
+  componentWillReceiveProps(nextProps){
+    if(nextProps.cartItems !== this.props.cartItems){
+      this.setState({
+        cartItems: nextProps.cartItems,
+      })
     }
   }
 
@@ -22,17 +37,18 @@ export default class CartItemHolder extends Component{
         button: false
       })
     }
+    this.setState({
+      cartItems: this.props.cartItems
+    })
   }
 
   handleCheckout(total){
+    let { updateOrders } = this.props
     let date = new Date()
     let year = date.getFullYear()
-    let month = date.getMonth()
+    let month = date.getMonth() + 1
     let day = date.getDate()
-
     let time = `${month}-${day}-${year}`
-
-    let jsonTotal = JSON.stringify(total)
 
     fetch('/api/v1/orders',{
       method: "POST",
@@ -41,13 +57,32 @@ export default class CartItemHolder extends Component{
         price: total,
         date: time
       })
-    }).then((response) => console.log(response))
+    }).then((response) => {
+      fetch('/api/v1/orders')
+        .then(data => data.json())
+        .then((orders) => {
+        this.props.updateOrders(orders)
+      })
+      .catch(err => console.log(err))
+    })
     .catch(err => console.log(err))
+
     localStorage.clear()
+    this.setState({
+      cartItems: []
+    })
+  }
+  disableSubmit(){
+    if(this.state.cartItems.length > 0){
+      return false
+    } else {
+      return true
+    }
   }
 
   render(){
-    let {cartItems, clearCart} = this.props;
+    let {updateOrders} = this.props;
+    let cartItems = this.state.cartItems;
 
     let total = cartItems.reduce((acc, cartItem) =>{
       return acc + parseFloat(cartItem.price)
@@ -77,7 +112,7 @@ export default class CartItemHolder extends Component{
         ) : (
           <h2>Add Something to your Cart</h2>
         )}
-        <button className = "purchase" onClick = {() => this.handleCheckout(total)}>Submit and Purchase</button>
+        <button disabled={this.disableSubmit()} className = "purchase" onClick = {() => this.handleCheckout(total)}>Submit and Purchase</button>
       </div>
     </section>
     )

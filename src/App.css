@@ -151,6 +151,10 @@ main{
   background-color: #555588;
 }
 
+.purchase:disabled{
+  background-color: #555566;
+}
+
 .CartItem{
   margin-left: auto;
   margin-right: auto;
