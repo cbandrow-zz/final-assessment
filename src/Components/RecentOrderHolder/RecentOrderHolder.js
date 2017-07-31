@@ -5,7 +5,16 @@ export default class  RecentOrderHolder extends Component{
     super()
     this.state = {
       button: false,
-      display: 'order-contents-off'
+      display: 'order-contents-off',
+      orders: []
+    }
+  }
+
+  componentWillReceiveProps(nextProps){
+    if(nextProps.orders !== this.props.orders){
+      this.setState({
+        orders: nextProps.orders,
+      })
     }
   }
 
@@ -25,7 +34,7 @@ export default class  RecentOrderHolder extends Component{
 
   render(){
     let btnImg = "";
-    let {orders} = this.props || []
+    let orders = this.state.orders || []
     if (this.state.button === false){
       btnImg = "https://maxcdn.icons8.com/Android_L/PNG/512/Science/plus_math-512.png";
     } else {
